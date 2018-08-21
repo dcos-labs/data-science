@@ -1,5 +1,7 @@
 # Overview
 
+[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/dcos-labs/data-science/master?filepath=jupyter_home%2FStartHere.ipynb)
+
 ## Setup
 
 ### Install Graphviz
@@ -15,8 +17,6 @@ brew install graphviz
 ```
 
 #### Ubuntu Linux
-
-TODO(chris)
 
 datascience_env.yaml - The enviroment required to run all notebooks.
 To use run the conda create e.g.:
