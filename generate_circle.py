@@ -14,6 +14,7 @@ def gen_circle(filename, sample_count):
     """
     features, dependent = make_circles(n_samples=sample_count, noise=0.05)
     data = pd.DataFrame(dict(x=features[:, 0], y=features[:, 1], label=dependent))
+    data = data.rename(index=str, columns={'x': 'x1', 'y': 'x2', 'label': 'y'})
     data.to_csv(filename+'.csv', sep=',', encoding='utf-8', index=False)
 
 if len(sys.argv) < 2:
