@@ -2,6 +2,8 @@
 """Driver
 This program is a driver for generating data.
 """
+import warnings
+warnings.simplefilter("ignore")
 import sys
 import numpy as np
 import pandas as pd
@@ -10,8 +12,9 @@ from sklearn.datasets import make_circles
 def gen_circle(filename, sample_count):
     """Generate circle
     This function creates labeled data, one group being a circle in another.
+    It then takes apart one of the features into multiple features.
     Input: filename, sample_size
-    Output: filename.csv
+    Output: filename.csv [x1, x2, x3, x4, x5, y]
     """
     features, dependent = make_circles(n_samples=sample_count, noise=0.05)
     tmp = pd.DataFrame(dict(x=features[:, 0], y=features[:, 1], label=dependent))
