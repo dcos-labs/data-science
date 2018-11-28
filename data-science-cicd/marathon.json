@@ -1,0 +1,65 @@
+{
+  "id": "/dev/tensorflow/serving",
+  "cpus": 1,
+  "mem": 2048,
+  "user": "nobody",
+  "cmd": "tensorflow_model_server --port=${PORT_SERVING} --model_name=${TENSORFLOW_MODEL_NAME} --model_base_path=/mnt/mesos/sandbox",
+  "container": {
+    "type": "MESOS",
+    "docker": {
+      "forcePullImage": true,
+      "image": "vishnumohan/tensorflow-dcos"
+    }
+  },
+  "fetch": [
+    {
+      "uri": "https://s3.amazonaws.com/vishnu-mohan/tensorflow/mnist-model.tgz",
+      "extract": true,
+      "executable": false,
+      "cache": false
+    }
+  ],
+  "env": {
+    "TENSORFLOW_MODEL_NAME": "mnist"
+  },
+  "labels": {
+    "DCOS_PACKAGE_IS_FRAMEWORK": "false",
+    "DCOS_PACKAGE_NAME": "tensorflow-serving",
+    "DCOS_PACKAGE_REGISTRY_VERSION": "3.0",
+    "DCOS_PACKAGE_RELEASE": "0",
+    "DCOS_PACKAGE_SOURCE": "https://universe.mesosphere.com/repo",
+    "DCOS_PACKAGE_VERSION": "1.5.0-1.11.0",
+    "DCOS_SERVICE_NAME": "dev/tensorflow/serving",
+    "DCOS_SERVICE_PORT_INDEX": "0",
+    "DCOS_SERVICE_SCHEME": "http",
+    "MARATHON_SINGLE_INSTANCE_APP": "true"
+  },
+  "portDefinitions": [
+    {
+      "protocol": "tcp",
+      "port": 0,
+      "name": "serving",
+      "labels": {
+        "VIP_0": "/dev/tensorflow/serving:9000"
+      }
+    }
+  ],
+  "healthChecks": [
+    {
+      "protocol": "MESOS_TCP",
+      "portIndex": 0,
+      "gracePeriodSeconds": 60,
+      "intervalSeconds": 20,
+      "timeoutSeconds": 10,
+      "maxConsecutiveFailures": 3
+    }
+  ],
+  "upgradeStrategy": {
+    "maximumOverCapacity": 0,
+    "minimumHealthCapacity": 0
+  },
+  "unreachableStrategy": {
+    "expungeAfterSeconds": 0,
+    "inactiveAfterSeconds": 0
+  }
+}
