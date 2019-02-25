@@ -30,14 +30,14 @@ This will install many components:
 * spark
 * Jupyter Lab
 * cockroachdb
-** Create tx database
-** Create kickstart table in tx database
+  * Create tx database
+  * Create kickstart table in tx database
 * Redash
-** Redis
-** Postgres database for Redash internals
-** Redash Server
-** Redash Worker
-** Redash scheduler
+  * Redis
+  * Postgres database for Redash internals
+  * Redash Server
+  * Redash Worker
+  * Redash scheduler
 
 
 ## Setup inside Jupyter
@@ -77,7 +77,4 @@ http://<marathon-lb url>
 ```
 * Create Connection using endpoint data
 * Create reports. Example queries in sql directory.
-** 
-** 
-** 
-** 
+  * report
