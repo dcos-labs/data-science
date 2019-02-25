@@ -64,7 +64,7 @@ conda create --yes -n Data python=3.6 sqlalchemy ipykernel
 source activate Data
 python -m ipykernel install --user --name=Data
 conda install --yes psycopg2 pandas seaborn
-~/data_science/load_cockroach.py $COCKROACH_ENDPOINT
+~/data-science/load_cockroach.py $COCKROACH_ENDPOINT
 ```
 
 ### Test connection with Jupyter Notebook
@@ -76,5 +76,9 @@ Open Redash installed as the default app on the load balancer.
 http://<marathon-lb url>
 ```
 * Create Connection using endpoint data
+  * Host is Cockroach DB (PG Endpoint)
+  * Port: 26257
+  * User: test_user
+  * Database Name: tx
 * Create reports. Example queries in sql directory.
   * report
