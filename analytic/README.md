@@ -46,9 +46,14 @@ Open Jupyter Lab
 http://<marathon-lb url>/jupterlab-notebook
 ```
 
+Clone this git repo inside the JupyterLab container:
+```
+git clone https://github.com/dcos-labs/data-science.git
+```
+
 Get the Cockroach DB endpoint from the services tab in the web interface or using the command line:
 ```
-dcos cockroachdb endpoints
+dcos cockroachdb endpoints pg
 ```
 
 ```
