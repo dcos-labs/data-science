@@ -81,4 +81,8 @@ http://<marathon-lb url>
   * User: test_user
   * Database Name: tx
 * Create reports. Example queries in sql directory.
-  * report
+  * backer_pledge_per_month.sql
+  * world_map.sql
+  * backer_per_category_per_month.sql
+  * success_rate_per_category.sql
+
