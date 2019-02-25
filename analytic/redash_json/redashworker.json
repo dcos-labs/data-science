@@ -1,0 +1,58 @@
+{
+  "env": {
+    "REDASH_REDIS_URL": "redis://redis.marathon.l4lb.thisdcos.directory:6379",
+    "POSTGRES_PASSWORD": "Ow425m2WazI7HtvCkRaZwhlYORgrdkFF",
+    "REDASH_DATABASE_URL": "postgresql://postgres:Ow425m2WazI7HtvCkRaZwhlYORgrdkFF@postgres.marathon.l4lb.thisdcos.directory:5432/postgres",
+    "REDASH_LOG_LEVEL": "INFO",
+    "REDASH_COOKIE_SECRET": "Bi1jfyMNUaMzkmHCzOcjOxgFJJni6LGx",
+    "PYTHONUNBUFFERED": "0"
+  },
+  "id": "/redashworker",
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "cmd": "/app/bin/docker-entrypoint worker",
+  "container": {
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "redash/redash:6.0.0.b8537",
+      "forcePullImage": false,
+      "privileged": false,
+      "parameters": []
+    }
+  },
+  "cpus": 0.5,
+  "disk": 0,
+  "instances": 1,
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 512,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "host"
+    }
+  ],
+  "portDefinitions": [
+    {
+      "labels": {
+        "VIP_0": "/redashworker:5000"
+      },
+      "name": "worker",
+      "protocol": "tcp",
+      "port": 5000
+    }
+  ],
+  "requirePorts": true,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 1
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "healthChecks": [],
+  "fetch": [],
+  "constraints": []
+}

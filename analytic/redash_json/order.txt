@@ -1,0 +1,6 @@
+redis.json
+postgres.json
+redashserver.json
+redashworker.json
+# creatdb runs only once. Maybe can add it to redash worker.
+createdb.json

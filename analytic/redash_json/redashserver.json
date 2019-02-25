@@ -1,0 +1,67 @@
+{
+  "env": {
+    "REDASH_REDIS_URL": "redis://redis.marathon.l4lb.thisdcos.directory:6379",
+    "POSTGRES_PASSWORD": "Ow425m2WazI7HtvCkRaZwhlYORgrdkFF",
+    "REDASH_DATABASE_URL": "postgresql://postgres:Ow425m2WazI7HtvCkRaZwhlYORgrdkFF@postgres.marathon.l4lb.thisdcos.directory:5432/postgres",
+    "REDASH_LOG_LEVEL": "INFO",
+    "REDASH_COOKIE_SECRET": "Bi1jfyMNUaMzkmHCzOcjOxgFJJni6LGx",
+    "PYTHONUNBUFFERED": "0"
+  },
+  "labels": {
+    "HAPROXY_DEPLOYMENT_GROUP": "redash",
+    "HAPROXY_0_REDIRECT_TO_HTTPS": "true",
+    "HAPROXY_GROUP": "external",
+    "HAPROXY_DEPLOYMENT_ALT_PORT": "10005",
+    "HAPROXY_0_VHOST": "ELB"
+  },
+  "id": "/redashserver",
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "cmd": "python /app/manage.py database create_tables;/app/bin/docker-entrypoint server",
+  "container": {
+    "portMappings": [
+      {
+        "containerPort": 5000,
+        "hostPort": 5000,
+        "labels": {
+          "VIP_0": "/redashserver:5000"
+        },
+        "protocol": "tcp",
+        "servicePort": 10108,
+        "name": "server"
+      }
+    ],
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "redash/redash:6.0.0.b8537",
+      "forcePullImage": false,
+      "privileged": false,
+      "parameters": []
+    }
+  },
+  "cpus": 0.5,
+  "disk": 0,
+  "instances": 1,
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 512,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "requirePorts": false,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 1
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "healthChecks": [],
+  "fetch": [],
+  "constraints": []
+}
