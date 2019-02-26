@@ -23,6 +23,7 @@ sleep 10
 dcos marathon app add /tmp/redash_json/redashworker.json
 sleep 10
 dcos marathon app add /tmp/redash_json/redashscheduler.json
+sleep 120
 
 export C_TASK=`dcos task | grep cockroachdb-0 | awk '{print $5}'`
 cat create_cockroach_db.sql | dcos task exec --interactive $C_TASK cockroach sql --insecure

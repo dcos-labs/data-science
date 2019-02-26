@@ -12,3 +12,4 @@ FROM tx.kickstart k
 WHERE state NOT IN ('live',
                     'undefined')
 GROUP BY main_category
+;
