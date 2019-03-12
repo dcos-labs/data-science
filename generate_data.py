@@ -18,12 +18,12 @@ def gen_circle(filename, sample_count):
     """
     features, dependent = make_circles(n_samples=sample_count, noise=0.05)
     tmp = pd.DataFrame(dict(x=features[:, 0], y=features[:, 1], label=dependent))
-    x0 = tmp['x']
-    x1 = np.random.normal(0, 1, sample_count)
-    x2 = np.random.normal(0, 1, sample_count)
-    x3 = np.random.normal(0, 1, sample_count)
-    x4 = x0 - (x1 + x2 + x3)
-    x5 = tmp['y']
+    x0 = np.round(tmp['x'], 8)
+    x1 = np.round(np.random.normal(0, 1, sample_count), 8)
+    x2 = np.round(np.random.normal(0, 1, sample_count), 8)
+    x3 = np.round(np.random.normal(0, 1, sample_count), 8)
+    x4 = np.round(x0 - (x1 + x2 + x3), 8)
+    x5 = np.round(tmp['y'], 8)
     y = tmp['label']
     data = pd.DataFrame({'x1':x1, 'x2':x2, 'x3':x3, 'x4':x4, 'x5':x5, 'y':y})
     data.to_csv(filename+'.csv', sep=',', encoding='utf-8', index=False)
