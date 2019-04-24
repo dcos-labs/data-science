@@ -1,0 +1,12 @@
+model_config_list {
+  config {
+    name: 'half_plus_two'
+    base_path: '/models/half_plus_two/'
+    model_platform: 'tensorflow'
+  }
+  config {
+    name: 'saved_model_half_plus_three'
+    base_path: '/models/saved_model_half_plus_three/'
+    model_platform: 'tensorflow'
+  }
+}
