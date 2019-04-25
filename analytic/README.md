@@ -6,7 +6,6 @@ This repo is meant to set up and run a demo for working with streaming data and 
 
 It is assumed that you already have a DCOS cluser up and running with the dcos client installed locally and configured to reach the cluster. The cluster must have at least one public accessable node for the load balancer to attach.
 
-
 ## Getting Started
 
 Determine the plublic agent URL. If using our terraform method to install the cluser, the URL required is the "Public Agent ELB Public IP":
