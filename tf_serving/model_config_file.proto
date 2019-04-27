@@ -9,4 +9,9 @@ model_config_list {
     base_path: '/tmp/tf_serving/models/half_plus_three/'
     model_platform: 'tensorflow'
   }
+  config {
+    name: 'mnist'
+    base_path: '/tmp/tf_serving/models/mnist/'
+    model_platform: 'tensorflow'
+  }
 }
