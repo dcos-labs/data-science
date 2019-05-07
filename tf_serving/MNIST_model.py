@@ -10,13 +10,9 @@
 # TensorFlow and tf.keras
 import tensorflow as tf
 from tensorflow import keras
-# s3 model storage
-import boto3
-from botocore.client import Config
 # Helper libraries
 import numpy as np
 import json
-import matplotlib.pyplot as plt
 import os
 import subprocess
 import time
@@ -77,7 +73,7 @@ print('\nTest accuracy: {}'.format(test_acc))
 import tempfile
 
 MODEL_NAME = 'mnist'
-MODEL_DIR = tempfile.gettempdir() + '/' + MODEL_NAME
+MODEL_DIR = './' + MODEL_NAME
 MODEL_VERSION = str(int(time.time()))
 export_path = os.path.join(MODEL_DIR, str(MODEL_VERSION))
 print('export_path = {}\n'.format(export_path))
@@ -91,50 +87,3 @@ tf.saved_model.simple_save(
     inputs={'input_image': model.input},
     outputs={t.name:t for t in model.outputs})
 
-
-# ## Test
-# View image
-
-# In[ ]:
-
-
-pic = test_images[0:1]
-plt.imshow(pic.reshape(28,28))
-
-
-# Save image as image.json
-
-# In[ ]:
-
-
-data = json.dumps({"signature_name": "serving_default", "instances": pic.tolist()})
-with open('image.json', 'w') as f:
-  f.write(data)
-
-
-# Move model to serving directory, then check<br>
-# curl -X POST -H "Content-Type: application/json" -d @image.json http://loadbalancerIP:assginedPORT/v1/models/mnist:predict
-# <br>Result:<br>
-# {
-#     "predictions": [[1.65433e-06, 1.64561e-07, 3.53323e-06, 2.86745e-06, 6.96201e-06, 0.0273952, 2.95962e-05, 0.157299, 0.00583552, 0.809425]
-#     ]
-# }
-# <br> Therefore, the last element is most likely (Ankle boot).
-
-# ### Can use s3 to store models
-# ```
-# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-# s3 = boto3.resource('s3',
-#                     endpoint_url='http://minio.marathon.l4lb.thisdcos.directory:9000',
-#                     aws_access_key_id=AWS_ACCESS_KEY_ID,
-#                     aws_secret_access_key=AWS_SECRET_ACCESS_KEY,
-#                     config=Config(signature_version='s3v4'),
-#                     region_name='us-east-1')
-# 
-# MODEL_WRITE = MODEL_NAME + '/' + MODEL_VERSION + '/saved_model.pb'
-# MODEL_READ = '/tmp/' + MODEL_WRITE
-# 
-# s3.Bucket('models').upload_file(MODEL_READ,MODEL_WRITE)
-# MODEL_WRITE
-# ```
